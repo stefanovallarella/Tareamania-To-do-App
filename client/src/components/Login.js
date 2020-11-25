@@ -19,15 +19,17 @@ class Login extends Component{
           password: this.state.password,
         }
         
-        const response = await fetch('/users/login',{
+        await fetch('/users/login',{
           method: 'POST',
           headers:{
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(cred)
+        })
+        .then(response => console.log("Success: ", response))
+        .catch((error) => {
+        console.error('Error:', error);
         });
-    /*     const body = await response.text();
-        this.setState({email: body}); */
       }
 
 

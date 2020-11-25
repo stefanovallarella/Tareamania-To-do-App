@@ -25,17 +25,18 @@ class Register extends Component{
           repeatedPassword: this.state.repeatPassword
         }
         
-        const response = await fetch('/users/register',{
+        await fetch('/users/register',{
           method: 'POST',
           headers:{
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(cred)
+        })   
+        .then(response => console.log("Success: ", response))
+        .catch((error) => {
+        console.error('Error:', error);
         });
-    /*     const body = await response.text();
-        this.setState({email: body}); */
       }
-
 
 
 

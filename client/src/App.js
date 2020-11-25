@@ -23,9 +23,9 @@ class App extends Component {
           </div>
         </div>
 
-        <Login /> 
+         <Login />  
 
-        {/* <Register />*/}
+         <Register />
 
         </React.Fragment>
       );
