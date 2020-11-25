@@ -8,8 +8,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+
+// Routes 
+const userRoutes = require('./routes/users');
+const tasksRoutes = require('./routes/tasks');
+
 // HTTP Requests
-app.get('/api/hello', (req, res) => {
+app.use('/users', userRoutes);
+app.use('/tasks', tasksRoutes);
+
+
+
+
+ app.get('/api/hello', (req, res) => {
   res.send({ express: 'Get /api/hello desde Express' });
 });
 

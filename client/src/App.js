@@ -4,75 +4,61 @@ import './App.css';
 
 class App extends Component {
   state = {
-    response: '',
-    post: '',
-    responseToPost: ''
+    email: '',
+    password:''
   };
 
   componentDidMount(){
-    this.callApi()
-      .then(res=> this.setState({ response: res.express }))
-      .catch( err => console.log(err));
+
   }
 
-  callApi = async () => {
-    const response = await fetch('/api/hello');
-    const body = await response.json();
 
-    if(response.status !== 200){
-      throw Error(body.message);
-    }
-    return body;
-  }
-
-  handleSubmit = async e => {
+  handleForm = async e => {
     e.preventDefault();
-    const response = await fetch('/api/world', {
+
+    const response = await fetch('/users/login',{
       method: 'POST',
       headers:{
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({post: this.state.post})
-    });
+      body: 
+        JSON.stringify({email: this.state.email}),
+    })
+/*     const body = await response.text();
 
-    const body = await response.text();
-
-    this.setState({responseToPost: body});
-  };
+    this.setState({email: body}); */
+  }
 
   render(){
       return (
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
-
-              <p>{this.state.response}</p>
-              <form onSubmit={this.handleSubmit}>
-                <p>
-                  <strong>Post to Server:</strong>
-                </p>
-                <input
-                  type="text"
-                  value={this.state.post}
-                  onChange={e => this.setState({ post: e.target.value })}
-                />
-                <button type="submit">Submit</button>
-              </form>
-              <p>{this.state.responseToPost}</p>
-              
+        <React.Fragment>
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1 class="display-4">Tareamania</h1>
+            <hr class="my-4"></hr>
+            <p class="lead">Aplicación para registrar todas tus tareas. Registrate!</p>
+          </div>
         </div>
+
+        <div className="container col-lg-4">
+          <form onSubmit={this.handleForm}>
+            <div className="form-group">
+              <label htmlFor="exampleInputEmail1">Email</label>
+              <input type="email" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={this.state.email} onChange={e => this.setState({email: e.target.value})} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="exampleInputPassword1">Contraseña</label>
+              <input type="password" name="password" className="form-control" id="exampleInputPassword1" value={this.state.password} onChange={e => this.setState({password: e.target.value})} />
+            </div>
+            <div className="form-group form-check  text-center">
+              <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+              <label className="form-check-label " htmlFor="exampleCheck1">Recordarme</label>
+            </div>
+            <button type="submit" className="btn btn-primary">Ingresar</button>
+          </form>
+        </div>
+
+        </React.Fragment>
       );
   }
 }
