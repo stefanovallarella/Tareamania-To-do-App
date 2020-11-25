@@ -16,14 +16,18 @@ class App extends Component {
   handleForm = async e => {
     e.preventDefault();
 
+    const cred = {
+      email: this.state.email,
+      password: this.state.password,
+    }
+    
     const response = await fetch('/users/login',{
       method: 'POST',
       headers:{
         'Content-Type': 'application/json',
       },
-      body: 
-        JSON.stringify({email: this.state.email}),
-    })
+      body: JSON.stringify(cred)
+    });
 /*     const body = await response.text();
 
     this.setState({email: body}); */
