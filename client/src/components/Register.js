@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 
-
 class Register extends Component{
     constructor(props){
         super(props);
@@ -10,7 +9,7 @@ class Register extends Component{
           password: '',
           firstName: '',
           lastName: '',
-          repeatPassword: ''
+          repeatPassword: '',
         }
     }
 
@@ -32,7 +31,9 @@ class Register extends Component{
           },
           body: JSON.stringify(cred)
         })   
-        .then(response => console.log("Success: ", response))
+        .then(response => {
+          console.log("Success: ", response);
+          })
         .catch((error) => {
         console.error('Error:', error);
         });
