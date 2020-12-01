@@ -6,12 +6,39 @@ const { user, task, category, status } = require('../database/models');
 const controller = {
     login: (req,res) => {
         let errors = validationResult(req);
-        let errorsMapped = errors.mapped();
-        console.log(errorsMapped);
-
+        let email = req.body.email;
+        let password = req.body.password;
+        let remember = req.body.remember;
         console.log(req.body);
 
-        res.send("Login");
+        if(errors.isEmpty()){
+            
+            user.findOne({ 
+                attributes: ['id', 'first_name', 'last_name', 'email', 'password'], 
+                where: {email},
+                include: [task]})
+            .then(user => {
+                /* console.log(user); */
+               /*  console.log(user.tasks[0]);  */
+               /* console.log(user.tasks[0].name); */ 
+               /* console.log(user.tasks[0].description);  */
+
+                if (user && bcrypt.compareSync(password, user.password)){
+                    let userToLogin = user;
+                    if(remember){
+                        res.cookie('remember', userToLogin.email, {maxAge: 12000000});
+                    }
+                    req.session.userLoggedIn = userToLogin;                    
+                }else{
+                    errorLogin = {
+                        loginError:'Email o password incorrectas'
+                    }
+                return res.send(JSON.stringify(errorLogin));
+
+                }
+            })
+            .catch(error => console.log(error));
+        }
     },
     register: (req,res) => {
 
@@ -46,7 +73,7 @@ const controller = {
             // Se lo paso a session para que quede loggeado.
             req.session.userLoggedIn = newUser;
         }
-        
+
         let respo = {validEmail: true};
 
         return res.send(JSON.stringify(respo))
