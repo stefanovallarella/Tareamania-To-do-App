@@ -33,10 +33,18 @@ class Register extends Component{
         })   
         .then(response => {
           console.log("Success: ", response);
+          const data = response.json();
+          return data;
           })
+        .then(data => {
+            console.log(data);
+        })
         .catch((error) => {
         console.error('Error:', error);
         });
+
+
+
       }
 
 

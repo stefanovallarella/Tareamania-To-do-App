@@ -5,7 +5,12 @@ const { user, task, category, status } = require('../database/models');
 
 const controller = {
     login: (req,res) => {
+        let errors = validationResult(req);
+        let errorsMapped = errors.mapped();
+        console.log(errorsMapped);
+
         console.log(req.body);
+
         res.send("Login");
     },
     register: (req,res) => {
@@ -41,14 +46,10 @@ const controller = {
             // Se lo paso a session para que quede loggeado.
             req.session.userLoggedIn = newUser;
         }
+        
+        let respo = {validEmail: true};
 
-/*         let response = {
-            noMatch: errorsMapped.password,
-            loggedInEmail: req.session.userLoggedIn.email
-        }
-        let responseJSON = JSON.stringify(response);
-        console.log(responseJSON); */
-        res.send("Register");
+        return res.send(JSON.stringify(respo))
     }
 
 }

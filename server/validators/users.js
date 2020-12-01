@@ -4,9 +4,11 @@ const { check } = require('express-validator');
 module.exports = {
     login: [
         check('email')
-            .notEmpty().withMessage('Debe ingresar con su email').bail(),
+            .notEmpty().withMessage('Debe ingresar con su email').bail()
+            .isEmail().withMessage('Debe ingresar un email válido'),
         check('password')
             .notEmpty().withMessage('Debes ingresar con su contraseña').bail()
+            .isLength({ min:6 }).withMessage('La contraseña debe tener al menos 6 caracteres')
     ],
     register: [
         check('first_name')
