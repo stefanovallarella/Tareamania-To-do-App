@@ -18,17 +18,22 @@ const controller = {
                 where: {email},
                 include: [task]})
             .then(user => {
-                /* console.log(user); */
+                
+                console.log(user.email);
                /*  console.log(user.tasks[0]);  */
                /* console.log(user.tasks[0].name); */ 
                /* console.log(user.tasks[0].description);  */
 
                 if (user && bcrypt.compareSync(password, user.password)){
                     let userToLogin = user;
-                    if(remember){
-                        res.cookie('remember', userToLogin.email, {maxAge: 12000000});
+                    if(remember !== undefined && remember !== false){
+                        res.cookie('remember', userToLogin.email, {maxAge: 120000000});
                     }
-                    req.session.userLoggedIn = userToLogin;                    
+                    req.session.userLoggedIn = userToLogin; 
+                    let login = {
+                        success: true
+                    }
+                    return res.send(JSON.stringify(login));                   
                 }else{
                     errorLogin = {
                         loginError:'Email o password incorrectas'
@@ -38,6 +43,9 @@ const controller = {
                 }
             })
             .catch(error => console.log(error));
+        }else{
+            let errorsMapped = errors.mapped();
+            return res.send(JSON.stringify(errorsMapped));
         }
     },
     register: (req,res) => {
