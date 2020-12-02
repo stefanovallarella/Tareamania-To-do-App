@@ -31,7 +31,7 @@ const controller = {
                     }
                     req.session.userLoggedIn = userToLogin; 
                     let login = {
-                        success: true
+                        successLogin: true
                     }
                     return res.send(JSON.stringify(login));                   
                 }else{

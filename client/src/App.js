@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 import Login from './components/Login';
 import Register from './components/Register';
 
 class App extends Component {
-  state = {
+  constructor(props){
+    super(props);
+    this.state = {
+    }
   };
 
-  componentDidMount(){}
+  componentDidMount(){
+
+    // Realizar Api para en funcion del middleware chequear si está logueado y mostrarle las Tareas. 
+
+  }
 
 
   render(){
