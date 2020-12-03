@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Route } from "react-router-dom";
 
 import Login from './components/Login';
 import Register from './components/Register';
+import Header from './components/Header';
 
 class App extends Component {
   constructor(props){
@@ -14,12 +16,20 @@ class App extends Component {
 
     // Realizar Api para en funcion del middleware chequear si está logueado y mostrarle las Tareas. 
 
+
+
   }
 
 
   render(){
       return (
         <React.Fragment>
+
+
+
+
+        <Header />
+
         <div class="jumbotron jumbotron-fluid">
           <div class="container">
             <h1 class="display-4">Tareamania</h1>
@@ -28,9 +38,13 @@ class App extends Component {
           </div>
         </div>
 
-         <Login />  
+      
+          <Route path="/login" component={ Login } />   
+          <Route path="/register" component={ Register } />
+    
+        {/*  <Login />  
 
-         <Register />
+         <Register /> */}
 
         </React.Fragment>
       );
