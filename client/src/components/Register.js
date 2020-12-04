@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../actions'
 
 
-class Register extends Component{
-    constructor(props){
-        super(props);
-        this.state={
-          email: '',
-          password: '',
-          firstName: '',
-          lastName: '',
-          repeatPassword: '',
-        }
-    }
+function Register(){
 
-    handleForm = async e => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [repeatPassword, setRepeatPassword] = useState('');
+
+    const dispatch = useDispatch();
+        
+    const handleForm = async e => {
         e.preventDefault();
         
         const cred = {
-          first_name: this.state.firstName,
-          last_name: this.state.lastName,
-          email: this.state.email,
-          password: this.state.password,
-          repeatedPassword: this.state.repeatPassword
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          password: password,
+          repeatedPassword: repeatPassword
         }
         
         await fetch('/users/register',{
@@ -37,52 +37,48 @@ class Register extends Component{
           return data;
           })
         .then(data => {
-            console.log(data);
+            console.log(data.validEmail);
+            if(data.validEmail){
+              dispatch(login());
+            }
         })
         .catch((error) => {
         console.error('Error:', error);
         });
 
-
-
       }
 
 
 
-    render(){
+
         return(
 
             <div className="container col-lg-4">
-                <form onSubmit={this.handleForm}>
+                <form onSubmit={handleForm}>
 
                     <div className="form-group">
                           <label htmlFor="exampleInputFirstName1">Nombre</label>
-                          <input type="text" name="first_name" className="form-control" id="exampleInputFirstName1" aria-describedby="firstNameHelp" value={this.state.firstName} onChange={e => this.setState({firstName: e.target.value})} />
+                          <input type="text" name="first_name" className="form-control" id="exampleInputFirstName1" aria-describedby="firstNameHelp" value={firstName} onChange={e => setFirstName(e.target.value)} />
                     </div>
 
                     <div className="form-group">
                           <label htmlFor="exampleInputLastName1">Apellido</label>
-                          <input type="text" name="last_name" className="form-control" id="exampleInputLastName1" aria-describedby="lastNameHelp" value={this.state.lastName} onChange={e => this.setState({lastName: e.target.value})} />
+                          <input type="text" name="last_name" className="form-control" id="exampleInputLastName1" aria-describedby="lastNameHelp" value={lastName} onChange={e => setLastName(e.target.value)} />
                     </div>
 
                     <div className="form-group">
                       <label htmlFor="exampleInputEmail1">Email</label>
-                      <input type="email" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={this.state.email} onChange={e => this.setState({email: e.target.value})} />
+                      <input type="email" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={email} onChange={e => setEmail(e.target.value)} />
                     </div>
 
                     <div className="form-group">
                       <label htmlFor="exampleInputPassword1">Contraseña</label>
-                      <input type="password" name="password" className="form-control" id="exampleInputPassword1" value={this.state.password} onChange={e => this.setState({password: e.target.value})} />
+                      <input type="password" name="password" className="form-control" id="exampleInputPassword1" value={password} onChange={e => setPassword(e.target.value)} />
                     </div>
 
                     <div className="form-group">
                       <label htmlFor="exampleInputRepeatedPassword1">Repetir contraseña</label>
-                      <input type="password" name="repeatedPassword" className="form-control" id="exampleInputRepeatedPassword1" value={this.state.repeatPassword} onChange={e => this.setState({repeatPassword: e.target.value})} />
-                    </div>
-
-                    <div className="form-group form-check  text-center">
-                      <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                      <label className="form-check-label " htmlFor="exampleCheck1">Recordarme</label>
+                      <input type="password" name="repeatedPassword" className="form-control" id="exampleInputRepeatedPassword1" value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)} />
                     </div>
 
                     <div className="row justify-content-center">
@@ -91,9 +87,6 @@ class Register extends Component{
                 </form>
              </div>
         )
-    }
-
-
 }
 
 export default Register;

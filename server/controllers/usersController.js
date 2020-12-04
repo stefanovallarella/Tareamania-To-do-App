@@ -53,6 +53,7 @@ const controller = {
         let errors = validationResult(req);
         let errorsMapped = {};
         let newUser = req.body;
+        let respo = {validEmail: false};
         if(!errors.isEmpty()){
             errorsMapped = errors.mapped();
         }
@@ -80,10 +81,9 @@ const controller = {
             delete newUser.password;
             // Se lo paso a session para que quede loggeado.
             req.session.userLoggedIn = newUser;
+            respo.validEmail = true;
         }
-
-        let respo = {validEmail: true};
-
+        
         return res.send(JSON.stringify(respo))
     },
     isLoggedIn: (req,res) => {

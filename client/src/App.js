@@ -28,13 +28,15 @@ function App() {
                     <NavLink className="nav-link" to="/register">Registrarse</NavLink>
                 </li>
             </ul>
-        : 
-        <ul className="nav justify-content-center">   
-          <li className="nav-item">
-              <span>BIENVENIDO</span>
-          </li>
-        </ul> 
-    }
+          : 
+            <ul className="nav justify-content-center">   
+              <li className="nav-item">
+                  <span>BIENVENIDO nombre</span>
+              </li>
+            </ul> 
+          }
+
+          
         <div class="jumbotron jumbotron-fluid">
           <div class="container">
             <h1 class="display-4">Tareamania</h1>

@@ -6,13 +6,13 @@ import { login } from '../actions'
 
 function Login(){
 
-        const [email, setEmail] = useState('');
-        const [password, setPassword] = useState('');
-        const [isChecked, setIsChecked] = useState(false);
-        const [isLoggedIn, setLoggedIn] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isChecked, setIsChecked] = useState(false);
+    /* const [isLoggedIn, setLoggedIn] = useState(false); */
 
 
-        const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
 
     const toggleChange = async e => {
