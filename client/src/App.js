@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 import Login from './components/Login';
 import Register from './components/Register';
-import Header from './components/Header';
+import Tasks from './components/Tasks';
 
 
 function App() {
@@ -16,39 +16,46 @@ function App() {
       return (
         <React.Fragment>
         <BrowserRouter>
-          {/* <Header /> */}
-
-          {!isLoggedIn ? 
-
-            <ul className="nav justify-content-center">   
-                <li className="nav-item">
-                    <NavLink className="nav-link" to="/login">Ingresar</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link" to="/register">Registrarse</NavLink>
-                </li>
-            </ul>
-          : 
-            <ul className="nav justify-content-center">   
-              <li className="nav-item">
-                  <span>BIENVENIDO nombre</span>
-              </li>
-            </ul> 
-          }
-
           
-        <div class="jumbotron jumbotron-fluid">
-          <div class="container">
-            <h1 class="display-4">Tareamania</h1>
-            <hr class="my-4"></hr>
-            <p class="lead">Aplicación para registrar todas tus tareas. Registrate!</p>
-          </div>
-        </div>
+          {!isLoggedIn ? 
+            <div>
+              <ul className="nav justify-content-center">   
+                  <li className="nav-item">
+                      <NavLink className="nav-link" to="/login">Ingresar</NavLink>
+                  </li>
+                  <li className="nav-item">
+                      <NavLink className="nav-link" to="/register">Registrarse</NavLink>
+                  </li>
+              </ul>
 
-        
+              <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                  <h1 class="display-4">Tareamania</h1>
+                  <hr class="my-4"></hr>
+                  <p class="lead">Aplicación para registrar todas tus tareas. Registrate!</p>
+                </div>
+              </div>
 
-          <Route path="/login" component={ Login } />   
-          <Route path="/register" component={ Register } /> 
+              <Route path="/login" component={ Login } />   
+              <Route path="/register" component={ Register } /> 
+            </div>
+          : 
+
+
+            <div>
+
+              <ul className="nav justify-content-center">   
+                <li className="nav-item">
+                    <span>BIENVENIDO nombre</span>
+                </li>
+              </ul> 
+
+              <Tasks />
+
+            </div>
+
+
+          }
 
         </BrowserRouter>
         </React.Fragment>
