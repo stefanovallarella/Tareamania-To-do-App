@@ -86,6 +86,13 @@ const controller = {
         
         return res.send(JSON.stringify(respo))
     },
+    logOut: (req,res) => {
+        res.cookie('remember','', {maxAge: -120000000});
+        req.session.destroy();
+        let respo = {logOut: true};
+        return res.send(JSON.stringify(respo));
+
+    },
     isLoggedIn: (req,res) => {
 
         let loggedIn;

@@ -10,5 +10,6 @@ router.post('/register', validator.register ,usersController.register);
 
 
 router.get('/loggedin', usersController.isLoggedIn);
+router.get('/logout', usersController.logOut);
 
 module.exports = router;

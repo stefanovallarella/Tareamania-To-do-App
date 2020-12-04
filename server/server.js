@@ -25,18 +25,5 @@ app.use('/tasks', tasksRoutes);
 
 
 
- app.get('/api/hello', (req, res) => {
-  res.send({ express: 'Get /api/hello desde Express' });
-});
-
-app.post('/api/world', (req, res) => {
-  console.log(req.body);
-  res.send(
-    `Llegó el req por POST. Data enviada por POST: ${req.body.post}`,
-  );
-});
-
-
-
 // Server 
 app.listen(port, () => console.log(`Listening on port ${port}`));

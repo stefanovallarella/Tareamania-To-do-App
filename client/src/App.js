@@ -2,6 +2,8 @@ import React from 'react';
 import { Route, NavLink, BrowserRouter } from "react-router-dom";
 
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { logout } from './actions'
 
 
 import Login from './components/Login';
@@ -11,6 +13,7 @@ import Tasks from './components/Tasks';
 
 function App() {
   
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.isLogged)
 
       return (
@@ -46,7 +49,10 @@ function App() {
 
               <ul className="nav justify-content-center">   
                 <li className="nav-item">
-                    <span>BIENVENIDO nombre</span>
+                    <p className="p-2">Bienvenido ####</p>
+                </li>
+                <li className="nav-item">
+                      <NavLink className="nav-link" to="/logout" onClick={e => {dispatch(logout())}}>Salir</NavLink>
                 </li>
               </ul> 
 
