@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, NavLink, BrowserRouter } from "react-router-dom";
 
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { logout } from './actions'
+import { namelogin } from './actions';
 
 
 import Login from './components/Login';
@@ -12,9 +13,23 @@ import Tasks from './components/Tasks';
 
 
 function App() {
-  
+
+
+  const[name, setName] = useState('');
+  const[email, setEmail] = useState('');
+
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.isLogged)
+
+  const loggedUser = useSelector(state => state.nameLogged);
+
+  const changedUser = () => {
+
+  setName(loggedUser.name); 
+  setEmail(loggedUser.email)
+
+}
+
 
       return (
         <React.Fragment>
@@ -24,7 +39,7 @@ function App() {
             <div>
               <ul className="nav justify-content-center">   
                   <li className="nav-item">
-                      <NavLink className="nav-link" to="/login">Ingresar</NavLink>
+                      <NavLink className="nav-link" to="/login" onClick={() => {dispatch(namelogin()); changedUser()}  }>Ingresar</NavLink>
                   </li>
                   <li className="nav-item">
                       <NavLink className="nav-link" to="/register">Registrarse</NavLink>
@@ -49,10 +64,10 @@ function App() {
 
               <ul className="nav justify-content-center">   
                 <li className="nav-item">
-                    <p className="p-2">Bienvenido ####</p>
+                <p className="p-2">Bienvenido {name} - {email}</p>
                 </li>
                 <li className="nav-item">
-                      <NavLink className="nav-link" to="/logout" onClick={e => {dispatch(logout())}}>Salir</NavLink>
+                      <NavLink className="nav-link" to="#" onClick={e => {dispatch(logout())}}>Salir</NavLink>
                 </li>
               </ul> 
 

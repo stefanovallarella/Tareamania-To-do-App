@@ -7,8 +7,6 @@ const loginAuth = require('../middlewares/loginAuth');
 
 router.post('/login', loginAuth, validator.login, usersController.login);
 router.post('/register', validator.register ,usersController.register);
-
-
 router.get('/loggedin', usersController.isLoggedIn);
 router.get('/logout', usersController.logOut);
 

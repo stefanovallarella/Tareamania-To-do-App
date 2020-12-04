@@ -96,6 +96,7 @@ const controller = {
     isLoggedIn: (req,res) => {
 
         let loggedIn;
+        let userInSession = req.session.userLoggedIn;
 
         if (req.session.userLoggedIn !== undefined){
         
@@ -105,7 +106,10 @@ const controller = {
                 meta: {
                     status: 200, 
                 },
-                data: loggedIn
+                data: {
+                    loggedIn,
+                    userInSession
+                }
             }
 
             return res.json(response);

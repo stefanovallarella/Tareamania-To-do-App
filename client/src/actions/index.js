@@ -24,3 +24,10 @@ export const logout = () => {
         type: 'SIGN_OUT'
     };
 };
+
+
+export const namelogin = () => {
+    return {
+        type: 'SIGN_IN_NAME'
+    };
+};
