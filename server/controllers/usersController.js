@@ -85,6 +85,39 @@ const controller = {
         let respo = {validEmail: true};
 
         return res.send(JSON.stringify(respo))
+    },
+    isLoggedIn: (req,res) => {
+
+        let loggedIn;
+
+        if (req.session.userLoggedIn !== undefined){
+        
+            loggedIn = true;
+
+            let response = {
+                meta: {
+                    status: 200, 
+                },
+                data: loggedIn
+            }
+
+            return res.json(response);
+        } else {
+            
+            loggedIn = false;
+
+            res.status(404).json({
+                meta : {
+                    status : 404,
+                    statusMsg : "User not logged in"
+                },
+                data : loggedIn
+            });
+
+        }
+
+
+
     }
 
 }
