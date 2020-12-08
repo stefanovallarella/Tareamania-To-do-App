@@ -6,6 +6,8 @@ const tasksAccessMiddleware = require('../middlewares/loggedForTasks');
 
 router.get('/', tasksAccessMiddleware, tasksController.allTasks);
 
+router.put('/edit/:id', tasksController.update);
+
 
 
 module.exports = router;

@@ -28,6 +28,23 @@ const controller = {
         .catch(error => console.log(error));
         
         return res.send(JSON.stringify(userAccessed));
+    },
+    update: async (req,res) => {
+
+        let id = req.params.id;
+        console.log(req.body);
+        console.log(id);
+      /*   try{
+            taskExists = await task.findByPk(id);
+
+            
+
+
+
+        } */
+
+
+
     }
 
 

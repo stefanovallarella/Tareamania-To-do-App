@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const methodOverride = require('method-override')
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -11,7 +12,8 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({secret: 'Tareamania', resave: false, saveUninitialized: true}));
-app.use(cookieParser())
+app.use(cookieParser());
+app.use(methodOverride('_method'));
 
 
 // Routes 
