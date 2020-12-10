@@ -43,7 +43,8 @@ const controller = {
 
         } */
 
-
+        let respo = {editDone: true};
+        return res.send(JSON.stringify(respo));
 
     }
 
