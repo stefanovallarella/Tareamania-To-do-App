@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { fetchAllTasks } from '../actions';
 
 
 function Tasks({ tasks }){
-
-    const [allTasks, setAllTasks] = useState([]);
-    const [edit, setEdit] = useState(false);
-
 
     const dispatch = useDispatch();
 
@@ -18,11 +13,6 @@ function Tasks({ tasks }){
 
     },[dispatch]);
     
-  /*   const editOnOff = async e => {
-        e.preventDefault();
-        setEdit(!edit);
-    } */
-
 
     return(
         <React.Fragment>

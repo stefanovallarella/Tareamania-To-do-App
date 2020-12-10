@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../actions'
+import { registerCheck } from '../actions/index'
+
 
 
 function Register(){
@@ -10,13 +11,22 @@ function Register(){
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
+    const [cred, setCred] = useState({});
+
 
     const dispatch = useDispatch();
         
+
+    useEffect(()=>{
+
+      dispatch(registerCheck(cred));
+
+    }, [dispatch]);
+
     const handleForm = async e => {
         e.preventDefault();
         
-        const cred = {
+        const credenciales = {
           first_name: firstName,
           last_name: lastName,
           email: email,
@@ -24,28 +34,8 @@ function Register(){
           repeatedPassword: repeatPassword
         }
         
-        await fetch('/users/register',{
-          method: 'POST',
-          headers:{
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(cred)
-        })   
-        .then(response => {
-          console.log("Success: ", response);
-          const data = response.json();
-          return data;
-          })
-        .then(data => {
-            console.log(data.validEmail);
-            if(data.validEmail){
-              dispatch(login());
-            }
-        })
-        .catch((error) => {
-        console.error('Error:', error);
-        });
-
+        setCred(credenciales);
+        
       }
 
 

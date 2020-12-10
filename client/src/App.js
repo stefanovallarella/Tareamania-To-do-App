@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, NavLink, BrowserRouter } from "react-router-dom";
-
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { logout } from './actions'
-import { namelogin } from './actions';
+import { useDispatch, connect } from 'react-redux';
 
 
 import Login from './components/Login';
@@ -12,34 +8,48 @@ import Register from './components/Register';
 import Tasks from './components/Tasks';
 
 
-function App() {
+function App({ showTasks }) {
 
-
-  const[name, setName] = useState('');
-  const[email, setEmail] = useState('');
 
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(state => state.isLogged)
 
-  const loggedUser = useSelector(state => state.nameLogged);
+  useEffect(() => { 
 
-  const changedUser = () => {
-
-  setName(loggedUser.name); 
-  setEmail(loggedUser.email)
-
-}
+  });
 
 
       return (
         <React.Fragment>
         <BrowserRouter>
           
-          {!isLoggedIn ? 
+          {showTasks ? 
+
+              <div>
+
+                <ul className="nav justify-content-center">   
+                  <li className="nav-item">
+                  <p className="p-2">Bienvenido</p>
+                  </li>
+                  <li className="nav-item">
+                        <NavLink className="nav-link" to="#">Salir</NavLink>
+                  </li>
+                </ul> 
+
+                <h1>BOCA LA RE CONCHA DE TU VIEJA</h1>
+                <h1>BOCA LA RE CONCHA DE TU VIEJA</h1>
+                <h1>BOCA LA RE CONCHA DE TU VIEJA</h1>
+                <h1>BOCA LA RE CONCHA DE TU VIEJA</h1>
+
+                {/* <Tasks /> */}
+
+              </div>
+
+          : 
+
             <div>
               <ul className="nav justify-content-center">   
                   <li className="nav-item">
-                      <NavLink className="nav-link" to="/login" onClick={() => {dispatch(namelogin()); changedUser()}  }>Ingresar</NavLink>
+                      <NavLink className="nav-link" to="/login">Ingresar</NavLink>
                   </li>
                   <li className="nav-item">
                       <NavLink className="nav-link" to="/register">Registrarse</NavLink>
@@ -57,24 +67,6 @@ function App() {
               <Route path="/login" component={ Login } />   
               <Route path="/register" component={ Register } /> 
             </div>
-          : 
-
-
-            <div>
-
-              <ul className="nav justify-content-center">   
-                <li className="nav-item">
-                <p className="p-2">Bienvenido {name} - {email}</p>
-                </li>
-                <li className="nav-item">
-                      <NavLink className="nav-link" to="#" onClick={e => {dispatch(logout())}}>Salir</NavLink>
-                </li>
-              </ul> 
-
-              <Tasks />
-
-            </div>
-
 
           }
 
@@ -84,4 +76,13 @@ function App() {
   
 }
 
-export default App;
+
+const mapStateToProps = state => ({
+
+  showTasks: state.loggedIn,
+
+})
+
+
+
+export default connect(mapStateToProps)(App);
