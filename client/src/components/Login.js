@@ -3,7 +3,7 @@ import { useDispatch, connect } from 'react-redux';
 import { isLoggedIn, updatePrueba } from '../actions';
 
 
-function Login({ checklogin }){
+function Login({ checklogin, loggedIn }){
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -29,11 +29,12 @@ function Login({ checklogin }){
         }
 
         checklogin(credenciales);
-
       }
 
         return(
             <React.Fragment>
+
+              {loggedIn ?  <p> </p> :
               <div className="container col-lg-4">
                   <form onSubmit={handleForm}>
                       <div className="form-group">
@@ -53,18 +54,19 @@ function Login({ checklogin }){
                       </div>
                   </form>
               </div>
+              }
+
              </React.Fragment>
         )
     
       }
-/* 
+
       const mapStateToProps = state => ({
 
-        showTasks: state.loggedIn,
-        update: state.refresh
+        loggedIn: state.reducers.loggedIn
 
       });
- */
+
 
       const mapDispatchToProps = (dispatch) => {
         return{
@@ -75,4 +77,4 @@ function Login({ checklogin }){
       }
     
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
