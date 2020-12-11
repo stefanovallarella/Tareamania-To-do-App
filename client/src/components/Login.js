@@ -9,8 +9,6 @@ function Login({ checklogin }){
     const [password, setPassword] = useState('');
     const [isChecked, setIsChecked] = useState(false);
   
-    const dispatch = useDispatch();
-
     useEffect(()=>{
 
     });

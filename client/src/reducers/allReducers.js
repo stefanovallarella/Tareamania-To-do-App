@@ -6,14 +6,12 @@ import {
     UPDATEPRUEBA
 } from '../actions/types'
 
-
 const initialState = {
     cred: {},
     loggedIn: false,
     validRegister: false,
     tasks: {},
-    loading: false,
-    refresh: false
+    loading: false
 };
 
 
@@ -33,7 +31,10 @@ const tareamania = (state = initialState, action) => {
                 validRegister: true
             };
         case GET_ALL_TASKS:
-            return state;
+            return {
+                ...state,
+                tasks: action.payload
+            };
         case UPDATEPRUEBA:
             return {
                 ...state,
