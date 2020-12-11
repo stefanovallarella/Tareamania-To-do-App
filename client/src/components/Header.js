@@ -49,7 +49,6 @@ function Header({ loggedIn, user }) {
                 </div>       
                
             }
-            
             </React.Fragment>
         )   
 }

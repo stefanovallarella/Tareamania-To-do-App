@@ -11,23 +11,36 @@ function TasksContainer({ tasks, loggedIn }){
     
     useEffect(() => { 
 
+        console.log(tasks);
         console.log(loggedIn);
-
-    },[loggedIn]);
+        dispatch(fetchAllTasks());
+ 
+    },[dispatch, loggedIn]);
 
     return(
         <React.Fragment>
-        {loggedIn ?
-            <p>Logueado</p>
-        :
-            <p> No logueado</p>
-        }     
+            {loggedIn ?
+                <div>
+                    <h1>Todas las tareas</h1>
+
+                    {tasks.map((task, i)=>{
+                    return <Tasks 
+                            key={i}
+                            name={task.name}
+                            description={task.description}
+                            />
+                    })}  
+
+                </div>
+            :
+                <p></p>
+            }     
         </React.Fragment>
     );
 }
 
 const mapStateToProps = state => ({
-    tasks: state.reducers.allTasks,
+    tasks: state.reducers.tasks,
     loggedIn: state.reducers.loggedIn,
 })
 
