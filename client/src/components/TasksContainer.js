@@ -7,8 +7,6 @@ import Tasks from '../components/Tasks';
 
 function TasksContainer({ tasks, loggedIn }){
     
-
-
     const dispatch = useDispatch();
     
     useEffect(() => { 
@@ -29,8 +27,8 @@ function TasksContainer({ tasks, loggedIn }){
 }
 
 const mapStateToProps = state => ({
-    tasks: state.allTasks,
-    loggedIn: state.loggedIn,
+    tasks: state.reducers.allTasks,
+    loggedIn: state.reducers.loggedIn,
 })
 
 export default connect(mapStateToProps, { fetchAllTasks })(TasksContainer);
