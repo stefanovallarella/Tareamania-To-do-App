@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import { NavLink } from "react-router-dom";
+import { logOut } from '../actions';
 
 
-function Header({ loggedIn, user }) {
+function Header({ loggedIn, user, loggedOut }) {
 
     useEffect(() => { 
 
@@ -21,7 +22,7 @@ function Header({ loggedIn, user }) {
                         <p className="p-2">Bienvenido - ({user.email})</p>
                     </li>
                     <li className="nav-item">
-                            <NavLink className="nav-link" to="#">Salir</NavLink>
+                            <NavLink className="nav-link" to="#" onClick={() => loggedOut()}>Salir</NavLink>
                     </li>
                     </ul>     
                 </div>   
@@ -59,9 +60,17 @@ const mapStateToProps = state => ({
     loggedIn: state.reducers.loggedIn
 })
 
+const mapDispatchToProps = dispatch => {
+    return{
+
+        loggedOut: () => dispatch(logOut())
+
+    }
+}
 
 
-export default connect(mapStateToProps)(Header);
+
+export default connect(mapStateToProps,mapDispatchToProps)(Header);
 
 
 

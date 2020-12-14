@@ -166,6 +166,31 @@ export const fetchAllTasks = () => async dispatch => {
 
 
 
+export const logOut = () => async dispatch => {
+
+    try{
+        
+        let loggedOut;
+
+        await fetch('/users/logout')
+            .then(result => result.json())
+            .then(logout => {
+                loggedOut = !logout;
+            })
+            .catch(err => {console.log(err)})
+
+        dispatch({
+            type: LOGGED_OUT,
+            payload: loggedOut
+        })
+    }
+    catch(e){
+        dispatch(console.log(e));
+    };
+
+};
+
+
 export const updatePrueba = () => dispatch => {
     dispatch({
         type: UPDATEPRUEBA

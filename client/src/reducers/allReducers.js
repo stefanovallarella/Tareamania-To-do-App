@@ -24,7 +24,10 @@ const tareamania = (state = initialState, action) => {
                 loggedIn: action.payload
             };
         case LOGGED_OUT:
-            return state;
+            return {
+                ...state,
+                loggedIn: action.payload
+            };
         case REGISTER:
             return {
                 ...state,
