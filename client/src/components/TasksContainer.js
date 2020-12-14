@@ -11,8 +11,6 @@ function TasksContainer({ tasks, loggedIn }){
     
     useEffect(() => { 
 
-        console.log(tasks);
-        console.log(loggedIn);
         dispatch(fetchAllTasks());
  
     },[dispatch, loggedIn]);
@@ -23,13 +21,14 @@ function TasksContainer({ tasks, loggedIn }){
                 <div>
                     <h1>Todas las tareas</h1>
 
-                    {tasks.map((task, i)=>{
+                    {tasks && tasks.map((task, i)=>{
                     return <Tasks 
                             key={i}
                             name={task.name}
                             description={task.description}
+                            status={task.status.name}
                             />
-                    })}  
+                    })}    
 
                 </div>
             :
@@ -41,7 +40,7 @@ function TasksContainer({ tasks, loggedIn }){
 
 const mapStateToProps = state => ({
     tasks: state.reducers.tasks,
-    loggedIn: state.reducers.loggedIn,
+    loggedIn: state.reducers.loggedIn
 })
 
 export default connect(mapStateToProps, { fetchAllTasks })(TasksContainer);

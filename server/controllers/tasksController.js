@@ -3,31 +3,50 @@ const { task, user, category, status } = require('../database/models');
 
 const controller = {
     allTasks: (req,res) => {    
-        console.log(req.session.userLoggedIn);
-        let userAccessed = req.session.userLoggedIn;
-        /*       {
-            id: 16,
-            first_name: 'stefanito',
-            last_name: 'pepito',
-            email: 'pepito@pepito.com',
-            password: '$2a$10$ACTza3VtdHBCqDFAlEM8Qe/XpOSEKIWnwjb6dduExffA4vnB1KoHW',
-            tasks: []
-            } */
+        
         let userInSession = req.session.userLoggedIn;
         let id = userInSession.id;
+        let userTasks;
 
-        task.findAll({
+       /*  user.findOne({ 
+            attributes: ['id', 'first_name', 'last_name', 'email', 'password'], 
+            where: {id},
+            include: [task]})
+        .then(user => {
+            
+            console.log(user.tasks[0]);
+            console.log(user.tasks[1]);
+            console.log(user.tasks[0].name);
+        })
+        .catch(err => console.log(err)); */
+
+       task.findAll({
             where:{
-                user_id: id
+                user_id: Number(id)
             },
             include: [ user, category, status]
         })
         .then(tasks => {
-            console.log(tasks);
+
+            let response = {
+                meta: {
+                     status: 200,
+                     count: tasks.length
+                },
+                data: tasks
+             }
+
+             res.json(response) 
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error)); 
+
+
+     
+
+
+
         
-        return res.send(JSON.stringify(userAccessed));
+       /*  return res.send(JSON.stringify(userTasks));  */
     },
     update: async (req,res) => {
 

@@ -28,7 +28,8 @@ const tareamania = (state = initialState, action) => {
         case REGISTER:
             return {
                 ...state,
-                validRegister: true
+                loggedIn: action.payload,
+                validRegister: action.payload
             };
         case GET_ALL_TASKS:
             return {

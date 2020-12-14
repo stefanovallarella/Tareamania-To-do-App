@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, connect } from 'react-redux';
-import { isLoggedIn, updatePrueba } from '../actions';
+import { isLoggedIn } from '../actions';
 
 
 function Login({ checklogin, loggedIn }){

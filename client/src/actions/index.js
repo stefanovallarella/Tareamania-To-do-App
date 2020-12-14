@@ -75,7 +75,7 @@ export const isLoggedIn = (cred) => async dispatch => {
           dispatch({
             type: LOGGED_IN,
             payload: logIn,
-            credenciales
+            credenciales: credenciales 
           })
           console.log(logIn);
     }
@@ -145,17 +145,13 @@ export const fetchAllTasks = () => async dispatch => {
         let allTasks;
 
         await fetch('/tasks/')
-            .then(result => {
-                let data = result.json();
-                return data;
-            })
-            .then(data => {
-                /* console.log(data);
-                console.log(data.tasks[0]); */
-                allTasks = data.tasks;
+            .then(result => result.json())
+            .then(tasks => {
 
+                allTasks = tasks.data;
+                console.log(tasks);
             })
-            .catch(err => {console.log(err);})
+            .catch(err => {console.log(err)})
 
         dispatch({
             type: GET_ALL_TASKS,

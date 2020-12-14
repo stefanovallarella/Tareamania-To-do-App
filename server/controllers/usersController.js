@@ -9,7 +9,7 @@ const controller = {
         let email = req.body.email;
         let password = req.body.password;
         let remember = req.body.remember;
-        console.log(req.body);
+        /* console.log(req.body); */
 
         if(errors.isEmpty()){
             
@@ -19,7 +19,7 @@ const controller = {
                 include: [task]})
             .then(user => {
                 
-                console.log(user.email);
+                /* console.log(user.email); */
                /*  console.log(user.tasks[0]);  */
                /* console.log(user.tasks[0].name); */ 
                /* console.log(user.tasks[0].description);  */
@@ -53,6 +53,7 @@ const controller = {
         let errors = validationResult(req);
         let errorsMapped = {};
         let newUser = req.body;
+        console.log(newUser);
         let respo = {validEmail: false};
         if(!errors.isEmpty()){
             errorsMapped = errors.mapped();
@@ -74,7 +75,7 @@ const controller = {
             // Creo el user y lo guardo
             user.create(newUser)
                 .then(result => {
-                    console.log(result);
+                    /* console.log(result); */
                     result.save();
                 })
             // Borro password
