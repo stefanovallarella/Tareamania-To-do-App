@@ -3,7 +3,8 @@ import {
     LOGGED_OUT,
     GET_ALL_TASKS,
     REGISTER,
-    UPDATEPRUEBA
+    UPDATEPRUEBA,
+    GET_ALL_CATEGORIES
 } from '../actions/types'
 
 const initialState = {
@@ -11,7 +12,8 @@ const initialState = {
     loggedIn: false,
     validRegister: false,
     tasks: {},
-    loading: false
+    loading: false,
+    categories: {}
 };
 
 
@@ -38,6 +40,11 @@ const tareamania = (state = initialState, action) => {
             return {
                 ...state,
                 tasks: action.payload
+            };
+        case GET_ALL_CATEGORIES:
+            return {
+                ...state,
+                categories: action.payload
             };
         case UPDATEPRUEBA:
             return {

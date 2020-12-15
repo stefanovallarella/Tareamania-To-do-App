@@ -6,7 +6,6 @@ const controller = {
         
         let userInSession = req.session.userLoggedIn;
         let id = userInSession.id;
-        let userTasks;
 
        /*  user.findOne({ 
             attributes: ['id', 'first_name', 'last_name', 'email', 'password'], 
@@ -48,6 +47,11 @@ const controller = {
         
        /*  return res.send(JSON.stringify(userTasks));  */
     },
+    create: async (req,res) => {
+
+        console.log(req.body);
+
+    },
     update: async (req,res) => {
 
         let id = req.params.id;
@@ -65,7 +69,31 @@ const controller = {
         let respo = {editDone: true};
         return res.send(JSON.stringify(respo));
 
-    }
+    },
+    categoryCreate: async (req,res) => {
+
+
+
+    },
+    allCategories: async (req,res) => {
+
+        category.findAll()
+        .then(category => {
+
+            let response = {
+                meta: {
+                     status: 200,
+                     count: category.length
+                },
+                data: category
+             }
+             
+             console.log(response);
+
+             res.json(response) 
+        })
+        .catch(error => console.log(error)); 
+    },
 
 
 

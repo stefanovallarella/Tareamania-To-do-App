@@ -8,6 +8,10 @@ router.get('/', tasksAccessMiddleware, tasksController.allTasks);
 
 router.put('/edit/:id', tasksController.update);
 
+/* router.post('/category-create', tasksController.categoryCreate); */
+
+router.get('/categories', tasksController.allCategories);
+
 
 
 module.exports = router;

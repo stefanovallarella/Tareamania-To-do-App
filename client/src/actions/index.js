@@ -3,7 +3,8 @@ import {
     LOGGED_OUT,
     GET_ALL_TASKS,
     REGISTER,
-    UPDATEPRUEBA
+    UPDATEPRUEBA,
+    GET_ALL_CATEGORIES
 } from './types'
 
 
@@ -189,6 +190,38 @@ export const logOut = () => async dispatch => {
     };
 
 };
+
+
+
+export const fetchAllCategories = () => async dispatch => {
+    try{
+        
+        let allCategories;
+
+        await fetch('/tasks/categories')
+        .then(result => result.json())
+        .then(categories => {
+
+            console.log(categories);
+            allCategories = categories.data;
+        })
+        .catch(err => {console.log(err)})
+
+        dispatch({
+            type: GET_ALL_CATEGORIES,
+            payload: allCategories
+        })
+    }
+    catch(e){
+        dispatch(console.log(e));
+    };
+
+}
+
+
+
+
+
 
 
 export const updatePrueba = () => dispatch => {
