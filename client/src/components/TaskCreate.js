@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { fetchAllCategories } from '../actions';
+import { createTask } from '../actions';
 
 
 
 function TaskCreate(props){
 
-    
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
     const [taskCategory, setTaskCategory] = useState('');
-    const [taskStatus, setTaskStatus] = useState('');
 
+    const dispatch = useDispatch();
+    
     useEffect(()=> {
 
     })
@@ -34,7 +34,7 @@ function TaskCreate(props){
             category: category(taskCategory)
         }
         
-        console.log(credenciales);
+        dispatch(createTask(credenciales))
         
       }
 
@@ -107,25 +107,16 @@ function TaskCreate(props){
  
 }
 
-/* const mapStateToProps = state => ({
 
-    allCategories: state.reducers.categories
-
-  });
 
 const mapDispatchToProps = dispatch => {
     return {
-
-        fetchAllCategories: () => dispatch(fetchAllCategories())
-
-
+        createNewTask: (cred) => dispatch(createTask(cred))
     }
-
-
 }
- */
+ 
 
-export default TaskCreate;
+export default connect(null, { createTask })(TaskCreate);
 
 
 

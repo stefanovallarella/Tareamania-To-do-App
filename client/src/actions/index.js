@@ -4,7 +4,8 @@ import {
     GET_ALL_TASKS,
     REGISTER,
     UPDATEPRUEBA,
-    GET_ALL_CATEGORIES
+    GET_ALL_CATEGORIES,
+    CREATE_TASK
 } from './types'
 
 
@@ -216,6 +217,50 @@ export const fetchAllCategories = () => async dispatch => {
         dispatch(console.log(e));
     };
 
+}
+
+
+export const createTask = (cred) => async dispatch => {
+    
+    try{
+        
+        let taskCreated;
+        cred.status = 1;
+        console.log(cred);
+
+        await fetch('/tasks/create',{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(cred)
+        })   
+        .then(response => {
+            console.log("Success: ", response);
+            const data = response.json();
+            return data;
+        })
+          .then(data => {
+
+            taskCreated = true;
+
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+            
+            dispatch({
+                type: CREATE_TASK,
+                payload: taskCreated
+            })   
+        }
+        catch(e){
+            dispatch( {
+                type: CREATE_TASK,
+                payload: console.log(e),
+            }) 
+    }
+    
 }
 
 

@@ -39,17 +39,12 @@ const controller = {
         })
         .catch(error => console.log(error)); 
 
-
-     
-
-
-
         
        /*  return res.send(JSON.stringify(userTasks));  */
     },
     create: async (req,res) => {
 
-        console.log(req.body);
+      
 
     },
     update: async (req,res) => {
@@ -59,20 +54,39 @@ const controller = {
         console.log(id);
       /*   try{
             taskExists = await task.findByPk(id);
-
-            
-
-
-
         } */
 
         let respo = {editDone: true};
         return res.send(JSON.stringify(respo));
 
     },
-    categoryCreate: async (req,res) => {
+    newTask: async (req,res) => {
+
+        try {
+            
+            let userInSession = req.session.userLoggedIn;
+            let id = userInSession.id;
+            
+            let newTask = {
+                name: req.body.name,
+                description: req.body.description,
+                user_id: Number(id),
+                category_id: Number(req.body.category),
+                status_id: Number(req.body.status)
+            }
+
+            console.log(newTask);
+            let newCreatedTask = await task.create(newTask, {
+                include: [ user, category, status ]
+            });
+            await newCreatedTask.save(); 
+
+        }catch(error){
+            console.log(error);
+        }
 
 
+        res.send('Respuesta');
 
     },
     allCategories: async (req,res) => {

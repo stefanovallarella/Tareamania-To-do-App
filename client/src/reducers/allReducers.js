@@ -4,7 +4,8 @@ import {
     GET_ALL_TASKS,
     REGISTER,
     UPDATEPRUEBA,
-    GET_ALL_CATEGORIES
+    GET_ALL_CATEGORIES,
+    CREATE_TASK
 } from '../actions/types'
 
 const initialState = {
@@ -13,7 +14,9 @@ const initialState = {
     validRegister: false,
     tasks: {},
     loading: false,
-    categories: {}
+    categories: {},
+    taskCreated: false
+
 };
 
 
@@ -46,6 +49,12 @@ const tareamania = (state = initialState, action) => {
                 ...state,
                 categories: action.payload
             };
+        case CREATE_TASK:
+            return {
+                ...state,
+                taskCreated: action.payload
+            };
+            
         case UPDATEPRUEBA:
             return {
                 ...state,

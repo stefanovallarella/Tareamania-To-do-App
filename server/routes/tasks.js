@@ -12,6 +12,8 @@ router.put('/edit/:id', tasksController.update);
 
 router.get('/categories', tasksController.allCategories);
 
+router.post('/create', tasksController.newTask);
+
 
 
 module.exports = router;
