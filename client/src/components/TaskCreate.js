@@ -16,12 +16,25 @@ function TaskCreate(props){
 
     })
 
+
     const handleForm = async e => {
         e.preventDefault();
         
-        const credenciales = {
-        }
+        const category = (category) => {
+            if(category === 'Facultad'){
+                return 1;
+            }else if(category === 'Varios'){
+                return 2;
+            }
+        } 
 
+        const credenciales = {
+            name: taskName,
+            description: taskDescription,
+            category: category(taskCategory)
+        }
+        
+        console.log(credenciales);
         
       }
 
@@ -62,11 +75,11 @@ function TaskCreate(props){
 
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Categoría</label>
-                                    <select name="category" class="form-control" id="exampleFormControlSelect1">
+                                    <select name="category" class="form-control" id="exampleFormControlSelect1" value={taskCategory} onChange={ e => setTaskCategory(e.target.value)}>
+                                        <option value="" selected disabled hidden>Elegir</option>
                                          {props.categories.map((category)=>{
-                                            return <option value={category.name.toLowerCase()}>{category.name}</option>
+                                            return <option value={`${category.name}`}>{category.name}</option>
                                         })} 
-
                                     </select>
                                 </div>
 
