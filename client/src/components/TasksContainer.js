@@ -32,6 +32,7 @@ function TasksContainer({ tasks, loggedIn, allCategories, createdTask }){
                                 name={task.name}
                                 description={task.description}
                                 status={task.status.name}
+                                id= {task.id}
                                 />
                         })}    
 

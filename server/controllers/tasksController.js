@@ -108,6 +108,26 @@ const controller = {
         })
         .catch(error => console.log(error)); 
     },
+    deleteTask: async (req,res) => {
+
+			//id
+/* 				let id = req.body ;
+        try{
+        
+						taskExist = await task.findByPk(1);
+					
+						await taskExist.destroy();
+
+
+
+
+
+        }catch(error){
+            console.log(error);
+ 
+        } */
+
+    }
 
 
 

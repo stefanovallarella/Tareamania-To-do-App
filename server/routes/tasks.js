@@ -14,6 +14,8 @@ router.get('/categories', tasksController.allCategories);
 
 router.post('/create', tasksController.newTask);
 
+router.delete('/delete', tasksController.deleteTask);
+
 
 
 module.exports = router;
