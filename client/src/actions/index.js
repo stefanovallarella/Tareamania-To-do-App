@@ -252,6 +252,11 @@ export const createTask = (cred) => async dispatch => {
             dispatch({
                 type: CREATE_TASK,
                 payload: taskCreated
+            })
+            
+            dispatch({
+                type: CREATE_TASK,
+                payload: !taskCreated
             })   
         }
         catch(e){

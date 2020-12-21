@@ -8,7 +8,7 @@ import TaskCreate from '../components/TaskCreate';
 
 
 
-function TasksContainer({ tasks, loggedIn, allCategories }){
+function TasksContainer({ tasks, loggedIn, allCategories, createdTask }){
     
     const dispatch = useDispatch();
     
@@ -16,7 +16,7 @@ function TasksContainer({ tasks, loggedIn, allCategories }){
 
         dispatch(fetchAllTasks());
         dispatch(fetchAllCategories());
-    },[dispatch, loggedIn]);
+    },[dispatch, loggedIn, createdTask]);
 
     return(
         <React.Fragment>
@@ -50,7 +50,8 @@ function TasksContainer({ tasks, loggedIn, allCategories }){
 const mapStateToProps = state => ({
     tasks: state.reducers.tasks,
     loggedIn: state.reducers.loggedIn,
-    allCategories: state.reducers.categories
+    allCategories: state.reducers.categories,
+    createdTask: state.reducers.taskCreated
 })
 
 export default connect(mapStateToProps, { fetchAllTasks, fetchAllCategories })(TasksContainer);
