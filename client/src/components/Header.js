@@ -8,7 +8,7 @@ function Header({ loggedIn, user, loggedOut }) {
 
     useEffect(() => { 
 
-        console.log(loggedIn);
+        
 
     },[loggedIn]);
 
