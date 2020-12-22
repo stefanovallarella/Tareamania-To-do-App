@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
+import { deleteTask } from '../actions'
 
 
 
@@ -8,6 +9,7 @@ function Tasks(props){
 
     const [id, setID] = useState(0);
 
+    const dispatch = useDispatch();
 
     const handleFormEdit = async e => {
 
@@ -17,7 +19,8 @@ function Tasks(props){
         e.preventDefault();
         console.log(id);
        
-
+        const credenciales = {id};
+        dispatch(deleteTask(credenciales))
     }
     
     return(
@@ -51,4 +54,4 @@ function Tasks(props){
 }
 
 
-export default Tasks;
+export default connect(null, { deleteTask })(Tasks);

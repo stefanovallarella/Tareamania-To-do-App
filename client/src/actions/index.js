@@ -5,7 +5,8 @@ import {
     REGISTER,
     UPDATEPRUEBA,
     GET_ALL_CATEGORIES,
-    CREATE_TASK
+    CREATE_TASK,
+    DELETE_TASK
 } from './types'
 
 
@@ -264,6 +265,55 @@ export const createTask = (cred) => async dispatch => {
                 type: CREATE_TASK,
                 payload: console.log(e),
             }) 
+    }
+    
+}
+
+
+
+export const deleteTask = (id) => async dispatch => {
+    
+    try{
+        
+        let deleted;
+        
+        await fetch('/tasks/delete',{
+            method: 'DELETE',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(id)
+        })   
+        .then(response => {
+            console.log("Success: ", response);
+            const data = response.json();
+            return data;
+        })
+          .then(data => {
+
+            deleted = data.deleteSuccessful; 
+
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+            
+            dispatch({
+                type: DELETE_TASK,
+                payload: deleted
+            })
+
+            dispatch({
+                type: DELETE_TASK,
+                payload: !deleted
+            })
+            
+        }
+        catch(e){
+            dispatch( {
+                type: DELETE_TASK,
+                payload: console.log(e),
+            })
     }
     
 }

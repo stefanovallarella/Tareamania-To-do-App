@@ -110,26 +110,21 @@ const controller = {
     },
     deleteTask: async (req,res) => {
 
-			//id
-/* 				let id = req.body ;
+        //id
+        let respo = {deleteSuccessful: true};
+        let id = req.body.id ;
+
         try{
-        
-						taskExist = await task.findByPk(1);
-					
-						await taskExist.destroy();
 
+            taskExist = await task.findByPk(id);
+            await taskExist.destroy();
 
-
-
+            res.send(JSON.stringify(respo))
 
         }catch(error){
             console.log(error);
- 
-        } */
-
+        } 
     }
-
-
 
 }
 
