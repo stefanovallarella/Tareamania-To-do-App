@@ -6,15 +6,16 @@ const tasksAccessMiddleware = require('../middlewares/loggedForTasks');
 
 router.get('/', tasksAccessMiddleware, tasksController.allTasks);
 
-router.put('/edit/:id', tasksController.update);
-
 /* router.post('/category-create', tasksController.categoryCreate); */
 
 router.get('/categories', tasksController.allCategories);
 
-router.post('/create', tasksController.newTask);
+router.post('/create', tasksController.create);
 
 router.delete('/delete', tasksController.deleteTask);
+
+router.put('/edit', tasksController.update);
+
 
 
 

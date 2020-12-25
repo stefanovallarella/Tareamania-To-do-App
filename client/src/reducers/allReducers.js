@@ -6,7 +6,8 @@ import {
     UPDATEPRUEBA,
     GET_ALL_CATEGORIES,
     CREATE_TASK,
-    DELETE_TASK
+    DELETE_TASK,
+    UPDATE_TASK
 } from '../actions/types'
 
 const initialState = {
@@ -60,7 +61,12 @@ const tareamania = (state = initialState, action) => {
             return {
                 ...state,
                 taskCreated: action.payload
-            };    
+            };   
+        case UPDATE_TASK:
+            return {
+                ...state,
+                taskCreated: action.payload
+            }; 
         case UPDATEPRUEBA:
             return {
                 ...state,

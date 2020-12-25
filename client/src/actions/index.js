@@ -6,7 +6,8 @@ import {
     UPDATEPRUEBA,
     GET_ALL_CATEGORIES,
     CREATE_TASK,
-    DELETE_TASK
+    DELETE_TASK,
+    UPDATE_TASK
 } from './types'
 
 
@@ -320,6 +321,51 @@ export const deleteTask = (id) => async dispatch => {
 
 
 
+export const updateTask = (cred) => async dispatch => {
+    
+    try{
+        
+        let taskUpdated;
+
+        await fetch('/tasks/edit',{
+            method: 'PUT',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(cred)
+        })   
+        .then(response => {
+            console.log("Success: ", response);
+            const data = response.json();
+            return data;
+        })
+          .then(data => {
+
+            taskUpdated = true;
+
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+            
+            dispatch({
+                type: UPDATE_TASK,
+                payload: taskUpdated
+            })
+            
+            dispatch({
+                type: UPDATE_TASK,
+                payload: !taskUpdated
+            })   
+        }
+        catch(e){
+            dispatch( {
+                type: UPDATE_TASK,
+                payload: console.log(e),
+            }) 
+    }
+    
+}
 
 
 

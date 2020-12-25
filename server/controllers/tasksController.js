@@ -42,25 +42,31 @@ const controller = {
         
        /*  return res.send(JSON.stringify(userTasks));  */
     },
-    create: async (req,res) => {
-
-      
-
-    },
     update: async (req,res) => {
 
-        let id = req.params.id;
-        console.log(req.body);
-        console.log(id);
-      /*   try{
-            taskExists = await task.findByPk(id);
-        } */
+        let id = req.body.id;
+        let name = req.body.name;
+        let description = req.body.description;
+        let status = Number(req.body.status);
 
         let respo = {editDone: true};
-        return res.send(JSON.stringify(respo));
+
+        try{
+            taskExists = await task.findByPk(id);
+            taskExists.name = name;
+            taskExists.description = description;
+            taskExists.status_id = status;
+            taskExists.save();
+
+            return res.send(JSON.stringify(respo));
+
+        }catch(error){
+            console.log(error);
+            res.send(JSON.stringify(!respo));
+        }
 
     },
-    newTask: async (req,res) => {
+    create: async (req,res) => {
 
         try {
             
